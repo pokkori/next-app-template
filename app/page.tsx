@@ -9,13 +9,16 @@ export default function HanaMoriAbout() {
           21 y/o · Tokyo born · LA based · AI Character
         </p>
         <div className="flex flex-col items-center gap-1 mb-2">
+          <div className="bg-[#fef3c7] border border-[#fbbf24] rounded-full px-4 py-1.5 mb-2 text-xs font-semibold text-[#92400e]">
+            Founding Member slots: 7 remaining — locked-in $2.99/month forever
+          </div>
           <a
             href="https://dfans.co/hanamori"
             className="bg-[#7c3aed] text-white px-8 py-4 rounded-full text-base font-bold hover:bg-[#6d28d9] transition shadow-md"
           >
-            See Full Gallery →
+            Claim Founding Member Spot →
           </a>
-          <p className="text-xs text-[#888] mt-1">$4.99/month · Cancel anytime</p>
+          <p className="text-xs text-[#888] mt-1">$2.99/month locked-in · Normally $4.99 · Cancel anytime</p>
           <a
             href="https://hanamori-ai.itch.io"
             className="bg-[#fa5c5c] text-white px-6 py-3 rounded-full text-sm font-bold hover:opacity-90 transition shadow-md"
@@ -252,13 +255,14 @@ export default function HanaMoriAbout() {
 
       {/* CTA Bottom */}
       <section className="max-w-2xl mx-auto px-6 py-8 text-center">
-        <h2 className="text-xl font-bold mb-2">Join Hana&apos;s world</h2>
-        <p className="text-[#555] mb-6 text-sm">New art every day. Subscribe to see it all.</p>
+        <h2 className="text-xl font-bold mb-2">Be part of the origin story</h2>
+        <p className="text-[#555] mb-2 text-sm">7 Founding Member slots left at $2.99/month forever.</p>
+        <p className="text-[#888] mb-6 text-xs">After 10 slots: price returns to $4.99/month</p>
         <a
           href="https://dfans.co/hanamori"
           className="inline-block bg-[#7c3aed] text-white px-8 py-3 rounded-full text-base font-bold hover:bg-[#6d28d9] transition shadow-md"
         >
-          Subscribe on dFans
+          Claim Founding Member Spot →
         </a>
       </section>
 
