@@ -122,15 +122,19 @@ export default function HanaMoriAbout() {
       <section className="max-w-2xl mx-auto px-6 py-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold">Preview Gallery</h2>
-          <span className="text-xs text-[#888] bg-[#f3e8ff] px-2 py-1 rounded-full">109+ exclusive posts inside</span>
+          <span className="text-xs text-[#888] bg-[#f3e8ff] px-2 py-1 rounded-full">130+ exclusive posts inside</span>
         </div>
         <div className="grid grid-cols-3 gap-2 relative">
           {[1,2,3,4,5,6].map((i) => (
-            <div key={i} className="aspect-[3/4] bg-gradient-to-br from-[#e0c8f0] to-[#c4a8e8] rounded-xl overflow-hidden relative">
-              {i <= 2 ? (
-                <div className="w-full h-full flex items-center justify-center text-[#7c3aed] text-4xl font-bold opacity-30">H</div>
-              ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center bg-[#1a0a2e]/80 backdrop-blur-sm">
+            <div key={i} className="aspect-[3/4] rounded-xl overflow-hidden relative bg-[#e0c8f0]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/preview/preview_0${i}.webp`}
+                alt={`HanaMori preview ${i}`}
+                className={`w-full h-full object-cover ${i > 2 ? "blur-md scale-110" : ""}`}
+              />
+              {i > 2 && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#1a0a2e]/50">
                   <svg className="w-8 h-8 text-white mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
@@ -144,7 +148,7 @@ export default function HanaMoriAbout() {
               href="https://dfans.co/hanamori"
               className="block w-full text-center bg-[#7c3aed] text-white py-3 rounded-xl font-bold hover:bg-[#6d28d9] transition"
             >
-              Unlock 109+ Photos →
+              Unlock 130+ Photos →
             </a>
             <p className="text-center text-xs text-[#888] mt-1">$4.99/month · New art added every morning</p>
           </div>
