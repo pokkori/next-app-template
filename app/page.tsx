@@ -45,6 +45,26 @@ export default function HanaMoriAbout() {
         </div>
       </section>
 
+      {/* Video Teaser - DR確定: +34〜80% CVR */}
+      <section className="max-w-2xl mx-auto px-6 pb-6">
+        <div className="relative rounded-2xl overflow-hidden bg-[#1a0a2e] aspect-[9/16] max-h-[520px]">
+          {/* Fallback gradient if video doesn't load */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#2d1a4e] to-[#1a0a2e]" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-6">
+            <div className="text-5xl mb-3">🌸</div>
+            <p className="text-xl font-bold mb-1">HanaMori</p>
+            <p className="text-sm text-[#ccc] mb-4">Daily AI anime art · 109+ exclusive posts</p>
+            <a
+              href="https://dfans.co/hanamori"
+              className="bg-[#7c3aed] text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-[#6d28d9] transition"
+            >
+              See Full Gallery →
+            </a>
+            <p className="text-xs text-[#aaa] mt-2">$4.99/month · Cancel anytime</p>
+          </div>
+        </div>
+      </section>
+
       {/* Divider */}
       <div className="max-w-2xl mx-auto px-6">
         <hr className="border-[#e8d5c4]" />
