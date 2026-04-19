@@ -1,183 +1,248 @@
-"use client";
-
-import { useState } from "react";
-import PayjpModal from "@/components/PayjpModal";
-
-// TODO: アプリごとにここを変更する
-const APP_NAME = "TODO: アプリ名";
-const APP_TAGLINE = "TODO: キャッチコピー（20〜30文字）";
-const APP_SUBTEXT = "TODO: サブテキスト（50〜80文字・ベネフィットを具体的に）";
-const PLAN_LABEL = "スタンダードプラン ¥980/月（税込）· いつでも解約可能";
-const FREE_LIMIT = 3;
-
-export default function HomePage() {
-  const [showModal, setShowModal] = useState(false);
-  const [isPremium, setIsPremium] = useState(false);
-
-  // TODO: フォーム入力値を管理するstateを追加
-  const [input, setInput] = useState("");
-  const [result, setResult] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [count, setCount] = useState(0);
-
-  const handleGenerate = async () => {
-    if (!isPremium && count >= FREE_LIMIT) {
-      setShowModal(true);
-      return;
-    }
-    setLoading(true);
-    setResult("");
-    try {
-      // TODO: リクエストボディをアプリに合わせて変更
-      const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ input }),
-      });
-      if (!res.ok || !res.body) throw new Error("APIエラー");
-      // streaming読み取り
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let text = "";
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        text += decoder.decode(value, { stream: true });
-        setResult(text);
-      }
-      setCount((c) => c + 1);
-    } catch {
-      setResult("エラーが発生しました。もう一度お試しください。");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+export default function HanaMoriAbout() {
   return (
-    <main className="min-h-screen bg-white">
-      {/* ===== ヒーローセクション ===== */}
-      <section className="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-20 px-4 text-center">
-        <h1 className="text-3xl md:text-5xl font-black mb-4">{APP_TAGLINE}</h1>
-        <p className="text-blue-200 text-lg mb-8 max-w-xl mx-auto">{APP_SUBTEXT}</p>
-        <div className="inline-block bg-yellow-400 text-blue-900 font-bold text-sm px-4 py-2 rounded-full mb-6">
-          無料{FREE_LIMIT}回試せる · 登録不要
+    <main className="min-h-screen bg-[#fdf6f0] text-[#1a1a1a]">
+      {/* Hero */}
+      <section className="max-w-2xl mx-auto px-6 pt-16 pb-8 text-center">
+        <div className="text-6xl mb-4">🌸</div>
+        <h1 className="text-3xl font-bold mb-2">花森 Hana</h1>
+        <p className="text-lg text-[#555] mb-6">
+          21 y/o · Tokyo born · LA based · AI Character
+        </p>
+        <div className="flex flex-col items-center gap-1 mb-2">
+          <a
+            href="https://dfans.co/hanamori"
+            className="bg-[#7c3aed] text-white px-8 py-4 rounded-full text-base font-bold hover:bg-[#6d28d9] transition shadow-md"
+          >
+            See Full Gallery →
+          </a>
+          <p className="text-xs text-[#888] mt-1">$4.99/month · Cancel anytime</p>
+          <a
+            href="https://hanamori-ai.itch.io"
+            className="bg-[#fa5c5c] text-white px-6 py-3 rounded-full text-sm font-bold hover:opacity-90 transition shadow-md"
+          >
+            Art Packs (itch.io)
+          </a>
+        </div>
+        <div className="flex flex-wrap gap-3 justify-center">
+          <a
+            href="https://hanamori-ai.itch.io"
+            className="bg-[#fa5c5c] text-white px-5 py-2 rounded-full text-sm font-medium hover:opacity-90 transition"
+          >
+            itch.io Downloads
+          </a>
+          <a
+            href="https://twitter.com/hanamori_ai"
+            className="bg-black text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-[#222] transition"
+          >
+            X / Twitter
+          </a>
+          <a
+            href="https://bsky.app/profile/hanamori.bsky.social"
+            className="bg-[#0085ff] text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-[#0070dd] transition"
+          >
+            Bluesky
+          </a>
         </div>
       </section>
 
-      {/* ===== 特徴セクション ===== */}
-      <section className="py-16 px-4 max-w-4xl mx-auto">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-10">
-          {/* TODO: セクションタイトル */}
-          このAIでできること
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {/* TODO: 特徴カードを3〜4個書く */}
+      {/* Divider */}
+      <div className="max-w-2xl mx-auto px-6">
+        <hr className="border-[#e8d5c4]" />
+      </div>
+
+      {/* Shop cards */}
+      <section className="max-w-2xl mx-auto px-6 py-8">
+        <h2 className="text-xl font-bold mb-4">Get HanaMori&apos;s Art</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <a
+            href="https://dfans.co/hanamori"
+            className="block bg-white border border-[#e8d5c4] rounded-xl p-5 hover:shadow-md transition"
+          >
+            <div className="text-2xl mb-2">🔒</div>
+            <h3 className="font-bold mb-1">dFans Subscription</h3>
+            <p className="text-sm text-[#666] mb-2">Exclusive daily AI anime art. New content every day.</p>
+            <span className="text-[#7c3aed] text-sm font-semibold">$4.99/month Early Supporter →</span>
+          </a>
+          <a
+            href="https://ko-fi.com/hanamori_ai/shop"
+            className="block bg-white border border-[#e8d5c4] rounded-xl p-5 hover:shadow-md transition"
+          >
+            <div className="text-2xl mb-2">🖼️</div>
+            <h3 className="font-bold mb-1">AI Art Packs</h3>
+            <p className="text-sm text-[#666] mb-2">High-res PNG collections. Instant download.</p>
+            <span className="text-[#ff5e5b] text-sm font-semibold">From $4.99 →</span>
+          </a>
+          <a
+            href="https://hanamori-ai.itch.io"
+            className="block bg-white border border-[#e8d5c4] rounded-xl p-5 hover:shadow-md transition"
+          >
+            <div className="text-2xl mb-2">📦</div>
+            <h3 className="font-bold mb-1">itch.io Art Downloads</h3>
+            <p className="text-sm text-[#666] mb-2">23+ HanaMori images in high resolution ZIP packs.</p>
+            <span className="text-[#fa5c5c] text-sm font-semibold">From $4.99 →</span>
+          </a>
+          <a
+            href="https://ko-fi.com/hanamori_ai"
+            className="block bg-white border border-[#e8d5c4] rounded-xl p-5 hover:shadow-md transition"
+          >
+            <div className="text-2xl mb-2">☕</div>
+            <h3 className="font-bold mb-1">Support on Ko-fi</h3>
+            <p className="text-sm text-[#666] mb-2">Buy Hana a coffee and get exclusive thank-you art.</p>
+            <span className="text-[#ff5e5b] text-sm font-semibold">One-time from $3 →</span>
+          </a>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="max-w-2xl mx-auto px-6">
+        <hr className="border-[#e8d5c4]" />
+      </div>
+
+      {/* Preview Gallery with blur unlock */}
+      <section className="max-w-2xl mx-auto px-6 py-8">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold">Preview Gallery</h2>
+          <span className="text-xs text-[#888] bg-[#f3e8ff] px-2 py-1 rounded-full">109+ exclusive posts inside</span>
+        </div>
+        <div className="grid grid-cols-3 gap-2 relative">
+          {[1,2,3,4,5,6].map((i) => (
+            <div key={i} className="aspect-[3/4] bg-gradient-to-br from-[#e0c8f0] to-[#c4a8e8] rounded-xl overflow-hidden relative">
+              {i <= 2 ? (
+                <div className="w-full h-full flex items-center justify-center text-[#7c3aed] text-4xl font-bold opacity-30">H</div>
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center bg-[#1a0a2e]/80 backdrop-blur-sm">
+                  <svg className="w-8 h-8 text-white mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  <span className="text-white text-xs font-medium">Subscribers only</span>
+                </div>
+              )}
+            </div>
+          ))}
+          <div className="col-span-3 mt-2">
+            <a
+              href="https://dfans.co/hanamori"
+              className="block w-full text-center bg-[#7c3aed] text-white py-3 rounded-xl font-bold hover:bg-[#6d28d9] transition"
+            >
+              Unlock 109+ Photos →
+            </a>
+            <p className="text-center text-xs text-[#888] mt-1">$4.99/month · New art added every morning</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="max-w-2xl mx-auto px-6">
+        <hr className="border-[#e8d5c4]" />
+      </div>
+
+      {/* Who is HanaMori */}
+      <section className="max-w-2xl mx-auto px-6 py-8">
+        <h2 className="text-xl font-bold mb-3">Who is HanaMori?</h2>
+        <p className="text-[#444] leading-relaxed">
+          HanaMori — or just Hana — is a 21-year-old freelance graphic designer originally from Tokyo,
+          now living in Los Angeles. She shares her life through fashion, design, Japanese culture,
+          and the everyday chaos of being far from home.
+        </p>
+        <p className="text-[#444] leading-relaxed mt-3">
+          She loves matcha lattes (always comparing them to Japan), rewatching anime on rainy nights,
+          and finding tiny Japanese grocery stores hidden in LA neighborhoods.
+        </p>
+      </section>
+
+      {/* AI Disclosure */}
+      <section className="max-w-2xl mx-auto px-6 py-6">
+        <div className="bg-[#fef9c3] border border-[#fde047] rounded-xl p-5">
+          <h2 className="text-lg font-bold mb-2">Is this AI?</h2>
+          <p className="text-[#555] text-sm leading-relaxed">
+            <strong>Yes — and we&apos;re upfront about it.</strong> HanaMori is an AI-generated character.
+            Her images are created using AI image generation tools, and her content is written and managed
+            by a creative team. She is not a real human being.
+          </p>
+          <p className="text-[#555] text-sm leading-relaxed mt-2">
+            Think of HanaMori like a comic character, a virtual idol, or an illustrated persona —
+            just built with modern AI tools instead of pen and ink.
+          </p>
+        </div>
+      </section>
+
+      {/* Content */}
+      <section className="max-w-2xl mx-auto px-6 py-6">
+        <h2 className="text-xl font-bold mb-3">What kind of content?</h2>
+        <p className="text-[#444] leading-relaxed mb-3">
+          HanaMori&apos;s content is <strong>SFW (Safe for Work)</strong> — fashion, lifestyle,
+          Japanese culture, design inspiration, and everyday slice-of-life moments.
+        </p>
+        <ul className="space-y-2 text-[#555] text-sm">
           {[
-            { icon: "⚡", title: "TODO: 特徴1", desc: "TODO: 説明" },
-            { icon: "🎯", title: "TODO: 特徴2", desc: "TODO: 説明" },
-            { icon: "💎", title: "TODO: 特徴3", desc: "TODO: 説明" },
-          ].map((f) => (
-            <div key={f.title} className="bg-gray-50 rounded-2xl p-6 text-center">
-              <div className="text-4xl mb-3">{f.icon}</div>
-              <h3 className="font-bold text-gray-900 mb-2">{f.title}</h3>
-              <p className="text-gray-600 text-sm">{f.desc}</p>
+            "Daily exclusive AI anime art (dFans subscribers only)",
+            "High-res art packs for download (Ko-fi / itch.io)",
+            "Japanese culture and design inspiration content",
+            "Personal diary-style posts about LA life and homesickness",
+          ].map((item) => (
+            <li key={item} className="flex items-start gap-2">
+              <span className="text-[#7c3aed] mt-0.5">✦</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-2xl mx-auto px-6 py-6">
+        <h2 className="text-xl font-bold mb-4">FAQ</h2>
+        <div className="space-y-4">
+          {[
+            {
+              q: "Is HanaMori a real person?",
+              a: "No. HanaMori is a fully AI-generated character. Her appearance and story are created using AI image generation tools managed by a creative team. She is not a real human being.",
+            },
+            {
+              q: "How much does a dFans subscription cost?",
+              a: "The Early Supporter price is $4.99/month. This gives you access to 109+ exclusive posts with new AI anime art added every morning. The price will increase after the launch phase.",
+            },
+            {
+              q: "Where can I subscribe to HanaMori's exclusive content?",
+              a: "Subscribe on dFans at dfans.co/hanamori for daily exclusive AI anime art. Over 109 posts already in the archive, with new images added every morning.",
+            },
+            {
+              q: "Where can I buy HanaMori art packs?",
+              a: "Art packs are available on itch.io at hanamori-ai.itch.io. High-resolution PNG collections from $4.99 with instant download.",
+            },
+            {
+              q: "Is the content safe for work (SFW)?",
+              a: "Yes. All HanaMori content is SFW. She focuses on lifestyle, fashion, Japanese culture, and AI art. No explicit content is published anywhere.",
+            },
+            {
+              q: "Can I use the art packs commercially?",
+              a: "Art packs are licensed for personal use and non-commercial fan projects. Commercial use requires a separate license — contact the creative team.",
+            },
+          ].map(({ q, a }) => (
+            <div key={q} className="border border-[#e8d5c4] rounded-lg p-4 bg-white">
+              <p className="font-medium text-sm mb-1">{q}</p>
+              <p className="text-[#666] text-sm">{a}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ===== メインツールセクション ===== */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold text-center text-gray-900 mb-8">
-            {/* TODO: ツールセクションタイトル */}
-            さっそく試してみる
-          </h2>
-
-          {/* TODO: フォームUI をアプリに合わせて作成 */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 mb-4">
-            <label className="block text-sm font-bold text-gray-700 mb-2">
-              TODO: 入力ラベル
-            </label>
-            <textarea
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="TODO: プレースホルダーテキスト"
-              className="w-full border border-gray-300 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-              rows={4}
-            />
-            <button
-              onClick={handleGenerate}
-              disabled={loading || !input.trim()}
-              className="w-full mt-4 bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors"
-            >
-              {loading ? "生成中..." : "TODO: ボタンテキスト"}
-            </button>
-            {!isPremium && (
-              <p className="text-xs text-gray-400 mt-2 text-center">
-                無料残り {Math.max(0, FREE_LIMIT - count)} 回
-              </p>
-            )}
-          </div>
-
-          {/* 結果表示 */}
-          {result && (
-            <div className="bg-white rounded-2xl shadow-lg p-6 whitespace-pre-wrap text-sm text-gray-800 leading-relaxed">
-              {result}
-            </div>
-          )}
-        </div>
+      {/* CTA Bottom */}
+      <section className="max-w-2xl mx-auto px-6 py-8 text-center">
+        <h2 className="text-xl font-bold mb-2">Join Hana&apos;s world</h2>
+        <p className="text-[#555] mb-6 text-sm">New art every day. Subscribe to see it all.</p>
+        <a
+          href="https://dfans.co/hanamori"
+          className="inline-block bg-[#7c3aed] text-white px-8 py-3 rounded-full text-base font-bold hover:bg-[#6d28d9] transition shadow-md"
+        >
+          Subscribe on dFans
+        </a>
       </section>
 
-      {/* ===== 料金セクション ===== */}
-      <section className="py-16 px-4 max-w-2xl mx-auto text-center">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">料金プラン</h2>
-        <div className="border-2 border-blue-600 rounded-2xl p-8 mb-6">
-          <div className="text-blue-600 font-bold text-sm mb-2">スタンダードプラン</div>
-          <div className="text-4xl font-black text-gray-900 mb-1">
-            ¥980<span className="text-lg font-normal text-gray-500">/月</span>
-          </div>
-          <p className="text-gray-500 text-sm mb-6">税込 · いつでも解約可能</p>
-          {/* TODO: プラン特典リストを書く */}
-          <ul className="text-left space-y-2 text-sm text-gray-700 mb-6">
-            <li>✅ TODO: 特典1</li>
-            <li>✅ TODO: 特典2</li>
-            <li>✅ TODO: 特典3</li>
-          </ul>
-          <button
-            onClick={() => setShowModal(true)}
-            className="w-full bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-colors"
-          >
-            今すぐ登録する
-          </button>
-        </div>
-        <p className="text-xs text-gray-400">
-          解約は X(Twitter) @levona_design へのDMで受付しています
-        </p>
-      </section>
-
-      {/* ===== フッター ===== */}
-      <footer className="bg-gray-900 text-gray-400 text-xs py-6 px-4 text-center">
-        <div className="flex justify-center gap-4 mb-3">
-          <a href="/legal" className="hover:text-white">特定商取引法</a>
-          <a href="/privacy" className="hover:text-white">プライバシーポリシー</a>
-        </div>
-        <p>© {new Date().getFullYear()} ポッコリラボ · {APP_NAME}</p>
+      {/* Footer */}
+      <footer className="max-w-2xl mx-auto px-6 py-10 text-center text-xs text-[#aaa]">
+        <p>HanaMori is an AI-generated fictional character. All content is created for entertainment purposes.</p>
+        <p className="mt-1">No real personal data is collected beyond standard platform analytics.</p>
       </footer>
-
-      {/* PAY.JP モーダル */}
-      {showModal && (
-        <PayjpModal
-          publicKey={process.env.NEXT_PUBLIC_PAYJP_PUBLIC_KEY!}
-          planLabel={PLAN_LABEL}
-          onSuccess={() => {
-            setShowModal(false);
-            setIsPremium(true);
-            window.location.href = "/success";
-          }}
-          onClose={() => setShowModal(false)}
-        />
-      )}
     </main>
   );
 }
